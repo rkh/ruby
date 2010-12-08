@@ -56,6 +56,7 @@ class_alloc(VALUE flags, VALUE klass)
     RCLASS_CONST_TBL(obj) = 0;
     RCLASS_M_TBL(obj) = 0;
     RCLASS_SUPER(obj) = 0;
+    RCLASS_PREPENDED(obj) = obj;
     RCLASS_IV_INDEX_TBL(obj) = 0;
     return (VALUE)obj;
 }
@@ -692,6 +693,24 @@ rb_include_module(VALUE klass, VALUE module)
 	module = RCLASS_SUPER(module);
     }
     if (changed) rb_clear_cache();
+}
+
+void
+rb_prepend_module(VALUE klass, VALUE module)
+{
+    VALUE c;
+    rb_frozen_class_p(klass);
+    if (!OBJ_UNTRUSTED(klass)) {
+	rb_secure(4);
+    }
+
+    if (TYPE(module) != T_MODULE) {
+	Check_Type(module, T_MODULE);
+    }
+
+    OBJ_INFECT(klass, module);
+    RCLASS_PREPENDED(klass) = include_class_new(module, klass);
+    rb_clear_cache();
 }
 
 /*

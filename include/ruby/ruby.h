@@ -612,6 +612,7 @@ typedef struct {
     VALUE super;
     struct st_table *iv_tbl;
     struct st_table *const_tbl;
+    VALUE prepended;
 } rb_classext_t;
 
 struct RClass {
@@ -625,10 +626,12 @@ struct RClass {
 #define RCLASS_M_TBL(c) (RCLASS(c)->m_tbl)
 #define RCLASS_SUPER(c) (RCLASS(c)->ptr->super)
 #define RCLASS_IV_INDEX_TBL(c) (RCLASS(c)->iv_index_tbl)
+#define RCLASS_PREPENDED(c) (RCLASS(c)->ptr->prepended)
 #define RMODULE_IV_TBL(m) RCLASS_IV_TBL(m)
 #define RMODULE_CONST_TBL(m) RCLASS_CONST_TBL(m)
 #define RMODULE_M_TBL(m) RCLASS_M_TBL(m)
 #define RMODULE_SUPER(m) RCLASS_SUPER(m)
+#define RMODULE_PREPENDED(m) RCLASS_PREPENDED(m)
 
 struct RFloat {
     struct RBasic basic;
