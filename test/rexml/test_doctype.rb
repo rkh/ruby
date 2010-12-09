@@ -4,7 +4,7 @@
 require 'test/unit'
 require 'rexml/document'
 
-class TestDoctype < Test::Unit::TestCase
+class TestDocTypeAccessor < Test::Unit::TestCase
 
   def setup
     @sysid = "urn:x-test:sysid1"
@@ -64,4 +64,44 @@ class TestDoctype < Test::Unit::TestCase
     }
   end
   
+end
+
+class TestNotationDeclPublic < Test::Unit::TestCase
+  def setup
+    @name = "vrml"
+    @id = "VRML 1.0"
+    @uri = "http://www.web3d.org/"
+  end
+
+  def test_to_s
+    assert_equal("<!NOTATION #{@name} PUBLIC \"#{@id}\">",
+                 decl(@id, nil).to_s)
+  end
+
+  def test_to_s_with_uri
+    assert_equal("<!NOTATION #{@name} PUBLIC \"#{@id}\" \"#{@uri}\">",
+                 decl(@id, @uri).to_s)
+  end
+
+  private
+  def decl(id, uri)
+    REXML::NotationDecl.new(@name, "PUBLIC", id, uri)
+  end
+end
+
+class TestNotationDeclSystem < Test::Unit::TestCase
+  def setup
+    @name = "gif"
+    @id = "gif viewer"
+  end
+
+  def test_to_s
+    assert_equal("<!NOTATION #{@name} SYSTEM \"#{@id}\">",
+                 decl(@id).to_s)
+  end
+
+  private
+  def decl(id)
+    REXML::NotationDecl.new(@name, "SYSTEM", id, nil)
+  end
 end

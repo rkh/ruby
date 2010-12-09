@@ -1,3 +1,102 @@
+Thu Dec  9 20:14:39 2010  Nobuyoshi Nakada  <nobu@ruby-lang.org>
+
+	* parse.y (lvar_defined_gen, shadowing_lvar_gen, dvar_defined): no
+	  warnings for unused method and block arguments.
+	  [ruby-dev:42718] [ruby-dev:42724]
+
+Thu Dec  9 19:25:49 2010  Tanaka Akira  <akr@fsij.org>
+
+	* dln.c: parenthesize macro arguments.
+
+Thu Dec  9 18:51:06 2010  Tanaka Akira  <akr@fsij.org>
+
+	* lib/webrick/accesslog.rb (WEBrick::AccessLog#format): support
+	  %{remote}p for logging remote (client) port number.
+	  [ruby-dev:42670]
+
+Thu Dec  9 11:00:30 2010  Yukihiro Matsumoto  <matz@ruby-lang.org>
+
+	* array.c (rb_ary_dup): should copy contents only.  no instance
+	  variable, no class would be copied.  it would affect methods
+	  #sort, #reject, #transpose, #uniq, #compact, and #shuffle.
+	  [ruby-core:33640]
+
+	* array.c (rb_ary_reverse_m): ditto.
+
+	* array.c (rb_ary_rotate_m): ditto.
+
+Wed Dec  8 21:38:40 2010  NARUSE, Yui  <naruse@ruby-lang.org>
+
+	* ext/dl/lib/dl/struct.rb: clean a warning: assigned but unused
+	  variable. patched by Kouhei Yanagita. [ruby-dev:42722]
+
+	* ext/dl/lib/dl/import.rb: ditto.
+
+Wed Dec  8 21:36:16 2010  Nobuyoshi Nakada  <nobu@ruby-lang.org>
+
+	* parse.y (shadowing_lvar_gen): fix line number.  [ruby-dev:42718]
+
+Wed Dec  8 20:37:11 2010  Tanaka Akira  <akr@fsij.org>
+
+	* dir.c: parenthesize macro arguments.
+
+Tue Dec  7 22:37:15 2010  Masaya Tarui  <tarui@ruby-lnag.org>
+
+	* io.c (io_read): duplicate string if shared. [ruby-dev:42719]
+
+Tue Dec  7 22:31:08 2010  Nobuyoshi Nakada  <nobu@ruby-lang.org>
+
+	* lib/optparse.rb (OptionParser::Officious): separate completion
+	  options from --help.  [ruby-dev:42690]
+
+	* lib/optparse.rb (OptionParser::Completion#candidate),
+	  (OptionParser::Switch#compsys): remove unused variables.
+
+Tue Dec  7 22:05:25 2010  Nobuyoshi Nakada  <nobu@ruby-lang.org>
+
+	* transcode.c (transcode_loop): call default handler of the given
+	  hash, method, proc or [] method as fallback.  [ruby-dev:42692]
+
+Tue Dec  7 21:59:37 2010  Kouhei Sutou  <kou@cozmixng.org>
+
+	* lib/rexml/light/node.rb: remove circular require.
+
+Tue Dec  7 21:56:01 2010  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/rexml/test_light.rb: really suppress a warning.
+
+Tue Dec  7 21:51:57 2010  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/rexml/test_light.rb: suppress a warning.
+
+Tue Dec  7 21:14:03 2010  Tanaka Akira  <akr@fsij.org>
+
+	* debug.c: parenthesize macro arguments.
+
+Tue Dec  7 21:06:38 2010  Kouhei Sutou  <kou@cozmixng.org>
+
+	* lib/rexml/doctype.rb, test/rexml/test_doctype.rb: suppress warnings.
+	  [ruby-core:33305]
+	  Reported by Aaron Patterson. Thanks!!!
+
+Tue Dec  7 18:56:52 2010  NARUSE, Yui  <naruse@ruby-lang.org>
+
+	* ext/nkf/lib/kconv.rb (String#kconv): fix typo and update rdoc.
+	  patched by Kouhei Yanagita [ruby-dev:42696]
+
+Tue Dec  7 20:32:11 2010  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/rexml/test_doctype.rb: add Accessor to test case name.
+
+Tue Dec  7 20:31:02 2010  Kouhei Sutou  <kou@clear-code.com>
+
+	* test/rexml/test_doctype.rb: Doctype -> DocType.
+
+Tue Dec  7 20:29:23 2010  Kouhei Sutou  <kou@clear-code.com>
+
+	* test/rexml/test_doctype_mixin.rb: rename to ...
+	* test/rexml/test_doctype.rb: ... this to remove needless name.
+
 Tue Dec  7 17:03:16 2010  Shugo Maeda  <shugo@ruby-lang.org>
 
 	* lib/net/imap.rb (xlist): supported the XLIST command, which is an
@@ -23,7 +122,7 @@ Tue Dec  7 08:00:44 2010  Nobuyoshi Nakada  <nobu@ruby-lang.org>
 	* win32/Makefile.sub (WARNFLAGS): make declaration conflict
 	  warnings errors if possible.
 
-Sun Dec  5 10:32:11 2010  Tanaka Akira  <akr@fsij.org>
+Sun Dec  7 21:16:10 2010  Tanaka Akira  <akr@fsij.org>
 
 	* cont.c: parenthesize macro arguments.
 
