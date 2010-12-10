@@ -698,7 +698,7 @@ rb_include_module(VALUE klass, VALUE module)
 void
 rb_prepend_module(VALUE klass, VALUE module)
 {
-    VALUE c;
+    VALUE wrapped;
     rb_frozen_class_p(klass);
     if (!OBJ_UNTRUSTED(klass)) {
 	rb_secure(4);
@@ -709,7 +709,8 @@ rb_prepend_module(VALUE klass, VALUE module)
     }
 
     OBJ_INFECT(klass, module);
-    RCLASS_PREPENDED(klass) = include_class_new(module, klass);
+    wrapped = include_class_new(klass, RCLASS_SUPER(klass));
+    RCLASS_PREPENDED(klass) = include_class_new(module, wrapped);
     rb_clear_cache();
 }
 
