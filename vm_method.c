@@ -401,7 +401,7 @@ search_method(VALUE klass, ID id)
 
     klass = RCLASS_PREPENDED(klass);
     while (!st_lookup(RCLASS_M_TBL(klass), id, &body)) {
-	klass = RCLASS_SUPER(klass);
+	klass = RCLASS_PREPENDED(RCLASS_SUPER(klass));
 	if (!klass) {
 	    return 0;
 	}
