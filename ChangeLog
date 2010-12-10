@@ -1,3 +1,39 @@
+Fri Dec 10 11:36:43 2010  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
+
+	* compile.c (enum): remove a comma at end of enumerator list.
+
+	* constant.h (rb_const_flag_t): ditto.
+
+	* iseq.h (enum catch_type): ditto.
+
+	* iseq.h (enum defined_type): ditto.
+
+	* vm_core.h (enum iseq_type): ditto.
+
+	* vm_core.h (enum vm_special_object_type): ditto.
+
+Fri Dec 10 10:47:53 2010  NARUSE, Yui  <naruse@ruby-lang.org>
+
+	* sprintf.c (_HAVE_SANE_QUAD_): Don't forget LP64, r30156.
+
+Fri Dec 10 10:37:17 2010  NAKAMURA Usaku  <usa@ruby-lang.org>
+
+	* sprintf.c (_HAVE_SANE_QUAD_): if a certain platform has LONG_LONG in
+	  8 byte, it might be sane quad. [ruby-core:33634]
+
+Fri Dec 10 10:07:59 2010  NARUSE, Yui  <naruse@ruby-lang.org>
+
+	* lib/net/http.rb: remove version 1.1 features.
+
+Fri Dec 10 02:18:02 2010  Aaron Patterson <aaron@tenderlovemaking.com>
+
+	* ext/openssl/ossl_x509store.c (ossl_x509stctx_cleanup): removing C
+	  implementation of `cleanup`.
+
+	* ext/openssl/lib/openssl/x509.rb: adding ruby implementation of
+	  `cleanup`.  OpenSSL::X509::StoreContext#cleanup is deprecated since
+	  reusing the underlying struct doesn't make sense. [ruby-dev:42546]
+
 Thu Dec  9 20:14:39 2010  Nobuyoshi Nakada  <nobu@ruby-lang.org>
 
 	* parse.y (lvar_defined_gen, shadowing_lvar_gen, dvar_defined): no
