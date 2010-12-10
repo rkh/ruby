@@ -1712,7 +1712,8 @@ gc_mark_children(rb_objspace_t *objspace, VALUE ptr, int lev)
 	mark_m_tbl(objspace, RCLASS_M_TBL(obj), lev);
 	mark_tbl(objspace, RCLASS_IV_TBL(obj), lev);
 	mark_const_tbl(objspace, RCLASS_CONST_TBL(obj), lev);
-	ptr = RCLASS_SUPER(obj);
+	ptr = RCLASS_PREPENDED(obj);
+	if(ptr == obj) { ptr = RCLASS_SUPER(obj); }
 	goto again;
 
       case T_ARRAY:
